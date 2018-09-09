@@ -25,9 +25,9 @@ sklearn.tree (DecisionTreeRegressor module)
 2. Project Motivation
 This project is part of Term 2's first module (Introduction to Data Science) requirement, which is to use the CRISP-DM process to produce a data project. I utilised AirBnB data on Seattle homes to produce my project, which used the perspective of a Seattle home-owner. The objective is to offer a great experience for my guests while maximizing revenues. Thus, I explored ways to achieve this objective by using data to answer the following three questions:
 
-a. Can we predict what drives higher ratings?
-b. When and where are the most popular times of the year for rentals of Seattle homes?
-c. When and where are the highest revenue-generating times of the year for Seattle home-owners?
+  a. Can we predict what drives higher ratings?
+  b. When and where are the most popular times of the year for rentals of Seattle homes?
+  c. When and where are the highest revenue-generating times of the year for Seattle home-owners?
 
 3. File Descriptions
 This repo contains one file, called Udacity Term 2 Project - Seattle AirBnB.ipynb that contains the code. The data used the project is contained in the folder 'seattle'.

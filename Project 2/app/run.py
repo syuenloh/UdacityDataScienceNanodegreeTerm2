@@ -45,6 +45,8 @@ def index():
     genre_names = list(genre_counts.index)
     
     def message_count(val):
+        ```Return dictionary of category with number of messages according to classification 0,1 or 2
+            input: classification value (val)```
         return dict((cat,sum([ val== x for x in list(df[cat].values)])) for cat in df.columns[-36:])
 
     zero_list=message_count(0)

@@ -35,3 +35,28 @@ This repo contains one file, called Udacity Term 2 Project - Seattle AirBnB.ipyn
 #### 4. Licensing, Authors, Acknowledgements, etc.
 
 All Seattle AirBnB data was obtained from Kaggle. Other references are cited within the notebook.
+
+### Project 2: Disaster Response Pipelines
+#### 1. Installations
+This project was written in Python. The relevant Python packages for this project are as follows:
+
+- sys
+- pandas
+- sqlalchemy 
+- json
+- plotly
+- nltk
+- flask
+- sklearn
+- collections
+- pickle
+
+#### 2. Project Motivation
+This project is part of Term 2's second module (Data Engineering) requirement, which is apply data engineering skills to analyze disaster data from Figure Eight to build a model for an API that classifies disaster messages. The output is a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data. 
+
+#### 3. File Descriptions
+This repo contains 3 folders (app, data and models) that contains the files to run the web app. There is a readme file containing more details on how to run the web app. 
+
+#### 4. Licensing, Authors, Acknowledgements, etc.
+
+Data and guidance framework for coding project was provided by Udacity.

@@ -10,6 +10,7 @@ from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
+from collections import defaultdict
 
 
 app = Flask(__name__)
@@ -43,27 +44,66 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    def message_count(val):
+        return dict((cat,sum([ val== x for x in list(df[cat].values)])) for cat in df.columns[-36:])
+
+    zero_list=message_count(0)
+    one_list=message_count(1)
+    two_list=message_count(2)
+
+    dd = defaultdict(list)
+
+    for d in (zero_list,one_list,two_list): # you can list as many input dicts as you want here
+        for key, value in d.items():
+            dd[key].append(value)
+
+    df_new=pd.DataFrame(dd).transpose()
+    categories=list(df_new.index)
+    message_count=df_new[1]
+    
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
-        {
-            'data': [
+        dict(
+            data=[
+                Bar(
+                x=categories,
+                y=message_count,
+                marker=dict(
+            color='rgba(189,31,201,1)')
+                ),
+            ],
+            layout=dict(
+                title='Distribution of messages by categories classified as 1'
+            ) 
+        ),
+        dict(
+            data=[
+                Bar(
+                    x=categories,
+                    y=df_new[0],
+                 marker=dict(
+            color='rgba(58,218,250,1)')),
+            ],
+            layout=dict(
+                title='Distribution of messages by categories classified as 0'
+            ) 
+        ),
+        dict(
+            data=[
                 Bar(
                     x=genre_names,
                     y=genre_counts
                 )
             ],
-
-            'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
-            }
-        }
+            
+            layout=dict(
+                title='Distribution of Message Genres',
+                yaxis= dict(title="Count"),
+                xaxis=dict(title="Genre")
+            ) 
+          
+        )
     ]
     
     # encode plotly graphs in JSON

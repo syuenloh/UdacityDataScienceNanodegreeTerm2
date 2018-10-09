@@ -4,12 +4,18 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """Returns merged dataframe from messages and categories datasets on the common id.""" 
     messages=pd.read_csv(messages_filepath)
     categories=pd.read_csv(categories_filepath)
     df=pd.merge(messages,categories,on='id')
     return df
 
 def clean_data(df):
+    """Cleans dataframe:
+        - Values in the categories column were split so that each value becomes a separate column.
+        - Rename columns of categories with new column names.
+        - Encode string values into numeric values of 0 or 1.
+        - Drop duplicates."""
     categories = df['categories'].str.split(pat=';', expand=True)
     row = categories.iloc[0]
     category_colnames = row.apply(lambda x: x[:-2])
@@ -29,6 +35,7 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """Saves the dataframe into an sqlite database."""
     engine = create_engine('sqlite:///'+database_filename+'.db')
     df.to_sql(database_filename, engine, index=False)  
 

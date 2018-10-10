@@ -47,12 +47,12 @@ def tokenize(text):
 def build_model():
     """Returns model with machine learning pipeline."""
     pipeline = Pipeline([
-        ('vect', CountVectorizer(tokenizer=tokenize)),
-        ('tfidf', TfidfTransformer()),
-        ('clf', MultiOutputClassifier(RandomForestClassifier())) 
+        ('vect', CountVectorizer(tokenizer=tokenize,ngram_range=(1,2),max_df=1.0),
+        ('tfidf', TfidfTransformer(use_idf=True)),
+        ('clf', MultiOutputClassifier(RandomForestClassifier(n_estimators=10,min_samples_split=2))) 
          ])
 
-# Note: commented out because it takes too long to train the model
+# Note: commented out because it takes too long to train the model. Have passed in output of cv.best_params_ into pipeline above.
 #     parameters = {
 #         'vect__ngram_range': ((1, 1), (1, 2)),
 #         'vect__max_df': (0.5, 0.75, 1.0),

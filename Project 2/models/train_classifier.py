@@ -20,7 +20,7 @@ def load_data(database_filepath):
     Load data from database.
     Input: filepath to database 
     """
-    engine = create_engine('sqlite:///'+database_filepath+'.db')
+    engine = create_engine('sqlite:///'+database_filepath)
     df = pd.read_sql_table(database_filepath,engine)
     X = df.loc[:,'message']
     Y = df.iloc[:,-36:]

@@ -36,6 +36,9 @@ def clean_data(df):
     # convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
     
+    # replace all values that equals 2 to be encoded as 1
+    categories= categories.replace(2, 1)    
+    
     df.drop('categories',axis=1,inplace=True)
     df = pd.concat([df,categories],axis=1)
     df.drop_duplicates(inplace=True)
@@ -50,7 +53,7 @@ def save_data(df, database_filename):
     - database_filename: name of database
     """
     engine = create_engine('sqlite:///'+database_filename+'.db')
-    df.to_sql(database_filename, engine, index=False)  
+    df.to_sql(database_filename, engine, index=False, if_exists='replace',chunksize=500)  
 
 
 def main():

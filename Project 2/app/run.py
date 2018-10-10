@@ -16,7 +16,10 @@ from collections import defaultdict
 app = Flask(__name__)
 
 def tokenize(text):
-    """Clean, tokenize and process text data."""
+    """
+    Returns cleaned, tokenized and processed text data. 
+    Input: text string that is to be cleaned and tokenized.
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 

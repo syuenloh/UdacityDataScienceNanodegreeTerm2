@@ -16,7 +16,10 @@ import pickle
 
 
 def load_data(database_filepath):
-    """Load data from database."""
+    """
+    Load data from database.
+    Input: filepath to database 
+    """
     engine = create_engine('sqlite:///'+database_filepath+'.db')
     df = pd.read_sql_table(database_filepath,engine)
     X = df.loc[:,'message']
@@ -26,7 +29,10 @@ def load_data(database_filepath):
     
 
 def tokenize(text):
-    """Tokenize & process text data."""
+    """
+    Tokenize & process text data.
+    Input: text data to be cleaned and tokenized
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
     
@@ -62,7 +68,14 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    """Returns classification report for each category classified by the model."""
+    """
+    Returns classification report for each category classified by the model.
+    Inputs:
+    - model: trained model
+    - X_test: features in test dataset  to be used by model
+    - Y_test: categories/output  in test dataset to be evaluated against predicted output by model 
+    - category_names: names of all output categories that can be classified
+    """
     y_pred = model.predict(X_test)
     for a,b in enumerate(category_names):
         print("For column {}:".format(b))
@@ -71,7 +84,12 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-    """Exports model as a pickle file."""
+    """
+    Exports model as a pickle file.
+    Inputs:
+    - model: final trained model
+    - model_filepath: filepath destination to where model will be exported as pickle file
+    """
     filename = model_filepath
     pickle.dump(model, open(filename, 'wb'))
 
